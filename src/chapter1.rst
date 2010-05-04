@@ -4,8 +4,7 @@ Practical 1 for 2009/2010 - DNA Sequence Statistics
 Starting R
 ----------
 
-In your Statistics modules, you will have learnt to use the R
-statistics package
+In these bioinformatics practicals, you will learn to use the R statistics package
 (`www.r-project.org <http://www.r-project.org/>`_), a commonly used
 free Statistics software. R allows you to carry out statistical
 analyses in an interactive mode, as well as allowing simple
