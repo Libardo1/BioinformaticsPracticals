@@ -6,6 +6,7 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   src/chapter0.rst
    src/chapter1.rst
    src/chapter2.rst
    src/chapter3.rst
