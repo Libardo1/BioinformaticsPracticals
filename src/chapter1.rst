@@ -1,4 +1,4 @@
-Practical 1 for 2009/2010 - DNA Sequence Statistics
+Practical 1 - DNA Sequence Statistics
 ===================================================
 
 Starting R
@@ -11,6 +11,8 @@ analyses in an interactive mode, as well as allowing simple
 programming in a simple way that is a bit like Python.
 
 To use R, you first need to start the R program on your computer.
+You should have already installed R on your computer (if not, see
+`Chapter 0 <chapter0.html>`_).
 To do this, click on the "Start" menu at the bottom left of your
 Windows desktop, and then move your mouse over "All Programs" in
 the menu that pops up, and then click on 'R' (or R X.X.X, where
@@ -136,7 +138,7 @@ brackets). Thus, we can extract the second and third elements from
     [1]  8  6  9 10  5
 
 Elements of lists may also be named, and in this case the elements
-may be referred to either by giving the list name, followed by "$",
+may be referred to by giving the list name, followed by "$",
 followed by the element name. For example, *mylist$name* is the
 same as *mylist[[1]]* and *mylist$wife* is the same as
 *mylist[[2]]*:
@@ -147,7 +149,7 @@ same as *mylist[[1]]* and *mylist$wife* is the same as
     [1] "Mary"
 
 We can find out the names of the named elements in a list by using
-the *attributes()* function, for example:
+the attributes() function, for example:
 
 ::
 
@@ -193,6 +195,14 @@ number of children called "John"), we type:
     > mytable[[4]]
     [1] 2
 
+Alternatively, you can use the name of the fourth element in
+the table ("John") to find the value of that table element:
+
+::
+
+    > mytable[["John"]]
+    [1] 2
+
 Functions in R usually require *arguments*, which are input
 variables (ie. objects) that are passed to them, which they then
 carry out some operation on. For example, the log10() function is
@@ -212,7 +222,7 @@ function, you can type:
 
     > help("log10")
 
-When you use the help() function, a box will pop up with
+When you use the help() function, a box or webpage will pop up with
 information about the function that you asked for help with.
 
 If you are not sure of the name of a function, but think you know
@@ -236,9 +246,9 @@ the word "deviation" in their description by typing:
     stats::sd           Standard Deviation
     vsn::meanSdPlot     Plot row standard deviations versus row
 
-Among the functions that were found, the function sd() in the
+Among the functions that were found, is the function sd() in the
 "stats" library (an R library that comes with the standard R
-installation) is for calculating the standard deviation.
+installation), which is used for calculating the standard deviation.
 
 We can perform computations with R using objects such as scalars
 and vectors. For example, to calculate the average of the values in
@@ -274,12 +284,14 @@ set of R libraries
 contains several libraries with many R functions for analysing
 biological data sets such as microarray data; and the SeqinR
 library
-(`pbil.univ-lyon1.fr/software/seqinr <http://pbil.univ-lyon1.fr/software/seqinr>`_),
-which contains R functions for obtaining sequences from DNA
-sequence databases, and for analysing DNA sequences.
+(`pbil.univ-lyon1.fr/software/seqinr/home.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/home.php?lang=eng>`_),
+which contains R functions for obtaining sequences from DNA and protein
+sequence databases, and for analysing DNA and protein sequences.
 
-The SeqinR R library has already been installed on the computer
-that you are using for this practical. To use the SeqinR library in
+The SeqinR R library should have already been installed on the computer
+that you are using for this practical (if you have not already installed the
+SeqinR R library, see `Chapter 0 <chapter0.html>`_).
+To use the SeqinR library in
 the R package, you need to load the SeqinR library into R (using
 the library() function in R):
 
@@ -352,8 +364,8 @@ Sequence Database via its website
 The Bacteriophage lamda DNA sequence is a viral DNA sequence, and
 as mentioned above, its NCBI accession is NC\_001416. To retrieve
 the DNA sequence for Bacteriophage lambda from NCBI, go to the NCBI
-website, type "NC\_001416" in the Search box at the top right of
-the webpage, and press the "Search" button beside the Search box.
+website, type "NC\_001416" in the Search box at the top of
+the webpage, and press the "Search" button beside the Search box:
 
 |image0|
 
@@ -367,7 +379,7 @@ what the results page should look like for your NC\_001416 search.
 As you are looking for the DNA sequence of the Bacteriophage lambda
 genome, you expect to see a hit in the NCBI Nucleotide database,
 and indeed there is hit in the Nucleotide database (indicated by
-the "1" beside the icon for the Nucleotide database).
+the "1" beside the icon for the Nucleotide database):
 
 |image1|
 
@@ -381,7 +393,7 @@ When you click on the icon for the NCBI Nucleotide database, it
 will bring you to the record for NC\_001416 in the NCBI Nucleotide
 database. This will contain the name and NCBI accession of the
 sequence, as well as other details such as any papers describing
-the sequence.
+the sequence:
 
 |image3|
 
@@ -391,7 +403,7 @@ link at the top right of the NC\_001416 sequence record webpage,
 and choose "FASTA" from the list that appears. A box will pop up
 asking you what to name the file. You should give it a sensible
 name (eg. "lambda.fasta") and save it in a place where you will
-remember (eg. in the "My Documents" folder is a good idea).
+remember (eg. in the "My Documents" folder is a good idea):
 
 |image4|
 
@@ -406,7 +418,7 @@ Set "Files of type" to "All Documents" at the bottom of the WordPad
 "Open" dialog. You should see a list of files, now select the file
 that contains the lambda sequence (eg. "lambda.fasta"). The
 contents of the FASTA format file containing the lambda sequence
-should now be displayed in WordPad.
+should now be displayed in WordPad:
 
 |image5|
 
@@ -422,6 +434,7 @@ function from the SeqinR R library:
 
 ::
 
+    > library("seqinr") 
     > lambda <- read.fasta(file = "lambda.fasta")
 
 Note that R expects the files that you read in (eg. "lambda.fasta")
@@ -521,7 +534,7 @@ The GC content can be calculated as the percentage of the bases in
 the genome that are Gs or Cs. That is, GC content = (number of Gs +
 number of Cs)\*100/(genome length). For example, if the genome is
 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC
-content is (20 + 21)\*100/100 = 42%.
+content is (20 + 21)\*100/100 = 41%.
 
 You can easily calculate the GC content based on the number of As,
 Gs, Cs, and Ts in the genome sequence. For example, for the
@@ -563,7 +576,7 @@ nucleotides long (eg. "AAA", "AAT", "ACG", etc.), 4 nucleotides
 long, etc.
 
 To find the number of occurrences of DNA words of a particular
-length, we can use the count() function in R. For example, to find
+length, we can use the count() function from the R SeqinR library. For example, to find
 the number of occurrences of DNA words that are 1 nucleotide long
 in the sequence *lambdaseq*, we type:
 
@@ -586,6 +599,10 @@ words that are 2 nucleotides long, we type:
       tg   tt 
     3794 3345 
 
+Note that by default the count() function includes all overlapping DNA words in
+a sequence. Therefore, for example, the sequence "ATG" is considered to contain
+two words that are two nucleotides long: "AT" and "TG".
+
 If you type help('count'), you will see that the result (output) of
 the function count() is a *table* object. This means that you can
 use double square brackets to extract the values of elements from
@@ -601,6 +618,13 @@ the table. For example, to extract the value of the third element
 The command above extracts the third element of the table produced
 by count(lambdaseq,1), which we have stored in the table variable
 *lambdatable*.
+
+Alternatively, you can find the value of the element of the table
+in column "g" by typing:
+
+::
+
+   > lambdatable[["g"]]
 
 Summary
 -------
@@ -637,9 +661,7 @@ SeqinR library:
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package and SeqinR
-library for your project or assignments.
+Some links are included here for further reading.
 
 For background reading on DNA sequence statistics, it is
 recommended to read Chapter 1 of
@@ -677,7 +699,7 @@ Many of the ideas for the examples and exercises for this practical
 were inspired by the Matlab case studies on
 *Haemophilus influenzae*
 (`www.computational-genomics.net/case\_studies/haemophilus\_demo.html <http://www.computational-genomics.net/case_studies/haemophilus_demo.html>`_)
-and Bacteriophoage lambda
+and Bacteriophage lambda
 (`http://www.computational-genomics.net/case\_studies/lambdaphage\_demo.html <http://www.computational-genomics.net/case_studies/lambdaphage_demo.html>`_)
 from the website that accompanies the book
 *Introduction to Computational Genomics: a case studies approach*
@@ -693,6 +715,9 @@ Exercises
 Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
+
+Model answers to the exercises are given in the chapter entitled
+`Answers to the exercises in chapter 1 <chapter1_answers.html>`_.
 
 Q1. What are the last twenty nucleotides of the Bacteriophage lambda genome sequence?
 
@@ -733,8 +758,11 @@ Q7. How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1
 
 
 .. |image0| image:: ../_static/P1_image1.png
+            :width: 900
 .. |image1| image:: ../_static/P1_image2.png
 .. |image2| image:: ../_static/P1_image3.png
 .. |image3| image:: ../_static/P1_image4.png
+            :width: 900
 .. |image4| image:: ../_static/P1_image5.png
+            :width: 900
 .. |image5| image:: ../_static/P1_image6.png
