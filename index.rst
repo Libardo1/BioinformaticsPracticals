@@ -1,5 +1,5 @@
-Welcome to the System Biology Practicals!
-=========================================
+Welcome to the Bioinformatics and Computational System Biology Practicals!
+==========================================================================
 
 Contents:
 
